@@ -27,8 +27,17 @@ Die Module, die Sie hier benötigen, sind: tweepy and json
 
 ### Vorverarbeitung der Textdaten
 
+Für die Vorverarbeitung der Daten wird Spacy und Regex eigesetzt. Die drei Vorverarbeitungsschritte sind: Tokenisierung, Stoppwörter Entfernung,Lemmatisierung.
+Regex wird in dem Projekt angewendet, um die Tweets zu reinigen bzw. Sonderzeichen wie z.B. @mentions, hyperlinks, website link zu entfernen.
+Um mit SpaCy und ReGex in Python arbeiten zu können, müssen wir zunächst einige Bibliotheken mit pip installieren.
 
+How to install SpaCy:
+* pip install -U pip setuptools wheel
+* pip install -U spacy
+* python -m spacy download en_core_web_sm
 
+How to install ReGex:
+* pip install regex
 
 
 
