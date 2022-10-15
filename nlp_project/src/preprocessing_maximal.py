@@ -58,29 +58,38 @@ def clean_txt(text):
     text = text.encode("ascii", "ignore")
     text= text.decode()
     text = re.sub(r'((www\.[^\s]+)|(https?://[^\s]+))', "", text) #Remove special html characters such as website link, http/https/www
-    text = re.sub(r'["#&\()*+,-/:;@[\]^_`{|}~ξ]', "", text) #Remove Punctuations special characters such as % & ξ
+    text = re.sub(r'["?!$#&\()*+,-/:;@[\]^_`{|}~ξ]', "", text) #Remove Punctuations special characters such as % & ξ
     text = re.sub(r'()', "",text)
 
     return text
+def remove_double_tweets(data):
     
-def cleanedTweets(data):
-
-    # Read the tweets and clean it 
-    
+    # Read the tweets and remove double
+    all_tweets=[]
     with open(data,'r',encoding="UTF-8") as file:
+        #all_tweets=[]
         obj = json.load(file)
-        lines=[]
+        
         for tweets_obj in obj:
-            listofwords=[]
-            for string in tweets_obj['Tweet Text'].split():
-                listofwords.append(string.lower())
-            lines.append(clean_txt((" ".join(listofwords))))
+            all_tweets.append(tweets_obj['Tweet Text'])
+    return list(set(all_tweets))
+    
+def cleanedTweets(tweets):
+
+    # clean tweets
+    
+    all_tweets=[]
+    for tweet in tweets:
+        listofwords=[]
+        for token in tweet.split():
+            listofwords.append(token.lower())
+        all_tweets.append(clean_txt((" ".join(listofwords))))
         
         # removes duplicate blanks
-        lines=[" ".join(line.split()) for line in lines]
+    all_tweets=[" ".join(line.split()) for line in all_tweets]
        
 
-        return lines
+    return all_tweets
         
        
 def preprocess_data(c_tweets):
@@ -96,7 +105,8 @@ def preprocess_data(c_tweets):
             f.write('\n')
             
 
-        
-cleaned_tweets=cleanedTweets(path_to_clean_data)
+tweets=remove_double_tweets(path_to_clean_data)     
+cleaned_tweets=cleanedTweets(tweets)
+#print(cleaned_tweets)
 
 preprocess_data(cleaned_tweets)

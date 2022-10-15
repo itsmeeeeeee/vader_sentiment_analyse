@@ -19,7 +19,7 @@ path_data_maximal_preprocess=(Path(__file__)/f"{DATA_DIR}preprocessed_maximal.tx
 #Reading the txt file as a dataframe
 #df = pd.read_csv('C:/Users/aldi_/OneDrive/Desktop/nlp projekt/src (1)/data/preprocessed_tweets.txt', delimiter=" \t", engine='python')
 #Adding a column with the title "Tweets"
-df=df = pd.read_csv(path_data_maximal_preprocess, delimiter=" \t", engine='python')
+df=df = pd.read_csv(path_data_minimal_preprocess, delimiter=" \t", engine='python')
 df.columns = ['Tweets']
 
 
@@ -36,11 +36,11 @@ for i in range(df['Tweets'].shape[0]):
     neu = analyzer.polarity_scores(df['Tweets'][i])["neu"]
     neg = analyzer.polarity_scores(df['Tweets'][i])["neg"]
     
-    if compound >= 0.5:
+    if compound >= 0.05:
             ov = "POSITIVE"
-    elif compound <= -0.5:
+    elif compound <= -0.05:
             ov = "NEGATIVE"
-    elif compound > -0.5 and compound < 0.5: # hier an else-statement will also do
+    elif compound > -0.05 and compound < 0.05: # hier an else-statement will also do
             ov = "NEUTRAL"
 
     senti_scores.append({"Compound": compound,
@@ -53,7 +53,7 @@ for i in range(df['Tweets'].shape[0]):
 
 sentiments_score = pd.DataFrame.from_dict(senti_scores)
 df = df.join(sentiments_score)
-print(df)
+print (df)
 
 result_sentiments = df['Overall'].value_counts()
 print(result_sentiments)
