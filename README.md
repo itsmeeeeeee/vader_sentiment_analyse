@@ -1,5 +1,5 @@
-# vader_sentiment_analyse# 
-Sentimentanalyse im Kontext von Tweets
+# vader_sentiment_analyse
+# Sentimentanalyse im Kontext von Tweets
 
 Dieses Projekt wird uns durch den Prozess der Ausführung von Stimmungsanalysen für eine bestimmte Datenmenge führen. Die Daten bestehen aus einem Korpus (Sammlung) von Tweets, die Ethereum (Kryptowährung) betreffen. Der Korpus wird aufgebaut durch „scraping“ Tweets auf Twitter.
 
